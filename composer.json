@@ -3,7 +3,7 @@
   "type": "library",
   "description": "Optomany Checkout driver for the Omnipay payment processing library",
   "keywords": [
-    "verifone",
+    "optomany",
     "checkout",
     "gateway",
     "merchant",
