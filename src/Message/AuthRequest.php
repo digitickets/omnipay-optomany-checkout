@@ -12,12 +12,12 @@ class AuthRequest extends AbstractRequest
     public function getData()
     {
         $data = [
-            'client_id'=> $this->getClientId(),
-            'client_secret'=> $this->getClientSecret(),
-            'terminal'=> $this->getTerminal(),
-            'invoiceId'=> $this->getTransactionId(),
-            'amount'=> $this->getAmount(),
-            'currency'=> $this->getCurrency()
+            'client_id' => $this->getClientId(),
+            'client_secret' => $this->getClientSecret(),
+            'terminal' => $this->getTerminal(),
+            'invoiceId' => $this->getTransactionId(),
+            'amount' => $this->getAmount(),
+            'currency' => $this->getCurrency(),
         ];
 
         return array_filter($data);

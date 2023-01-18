@@ -13,7 +13,7 @@ class CheckoutUrlResponse extends AbstractResponse
     public function getCheckoutUrl()
     {
 
-       $json = $this->getData();
+        $json = $this->getData();
 
         return $json['url'];
     }

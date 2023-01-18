@@ -13,17 +13,16 @@ class CheckoutUrlRequest extends AbstractRequest
      */
     public function getData()
     {
-        /*$this->validate('amount');
-        $this->validate('returnUrl');
+        $this->validate('amount');
+        $this->validate('postLink');
 
-        */
         $card = $this->getCard();
 
         $data = [];
         $data['postLink'] = $this->getNotifyUrl();
         $data['failurePostLink'] = $this->getNotifyUrl();
         $data['backLink'] = $this->getReturnUrl();
-        $data['failureBackLink'] = $this->getReturnUrl();
+        $data['failureBackLink'] = $this->getCancelUrl();
         $data['description'] = $this->getDescription();
         $data['terminal'] = $this->getTerminal();
         $data['invoiceId'] = $this->getTransactionId();

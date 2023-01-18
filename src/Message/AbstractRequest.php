@@ -2,13 +2,10 @@
 
 namespace DigiTickets\OmnipayOptomanyCheckout\Message;
 
-use DNAPayments\DNAPayments;
 use Omnipay\Common\Message\AbstractRequest as BaseAbstractRequest;
 
 abstract class AbstractRequest extends BaseAbstractRequest
 {
-    //protected $liveEndpoint = '';
-    //protected $testEndpoint = 'https://test-oauth.dnapayments.com/oauth2/token';
 
     /**
      * @return string|null
@@ -60,14 +57,5 @@ abstract class AbstractRequest extends BaseAbstractRequest
     public function setAuth(array $value)
     {
         return $this->setParameter('auth', $value);
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getEndpoint()
-    {
-        //return $this->getTestMode() ? $this->testEndpoint : $this->liveEndpoint;
     }
 }

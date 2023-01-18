@@ -1,9 +1,9 @@
 {
   "name": "digitickets/omnipay-optomany-checkout",
   "type": "library",
-  "description": "Verifone Checkout driver for the Omnipay payment processing library",
+  "description": "Optomany Checkout driver for the Omnipay payment processing library",
   "keywords": [
-    "verifone",
+    "optomany",
     "checkout",
     "gateway",
     "merchant",

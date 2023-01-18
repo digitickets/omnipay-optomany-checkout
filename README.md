@@ -1,14 +1,14 @@
-# omnipay-verifone-checkout
+# omnipay-optomany-checkout
 
-**Redirect gateway driver for Verifone's Checkout hosted service**
+**Redirect gateway driver for Optomany's Checkout hosted service**
 
-Omnipay implementation of Verifone's Checkout hosted gateway.
+Omnipay implementation of Optomany's Checkout hosted gateway.
 
-See [Verifone's Checkout documentation](https://sandbox.omni.verifone.cloud/docs/checkout_overview) for more details.
+See [Optomany's Checkout documentation](https://developer.dnapayments.com/docs/payment-page/) for more details.
 
-[![Build Status](https://travis-ci.org/digitickets/omnipay-verifone-checkout.png?branch=master)](https://travis-ci.org/digitickets/omnipay-verifone-checkout)
-[![Latest Stable Version](https://poser.pugx.org/digitickets/omnipay-verifone-checkout/version.png)](https://packagist.org/packages/omnipay/omnipay-verifone-checkout)
-[![Total Downloads](https://poser.pugx.org/digitickets/omnipay-verifone-checkout/d/total.png)](https://packagist.org/packages/digitickets/omnipay-verifone-checkout)
+[![Build Status](https://travis-ci.org/digitickets/omnipay-optomany-checkout.png?branch=master)](https://travis-ci.org/digitickets/omnipay-optomany-checkout)
+[![Latest Stable Version](https://poser.pugx.org/digitickets/omnipay-optomany-checkout/version.png)](https://packagist.org/packages/digitickets/omnipay-optomany-checkout)
+[![Total Downloads](https://poser.pugx.org/digitickets/omnipay-optomany-checkout/d/total.png)](https://packagist.org/packages/digitickets/omnipay-optomany-checkout)
 
 ## Installation
 
@@ -18,7 +18,7 @@ to your `composer.json` file:
 ```json
 {
     "require": {
-        "digitickets/omnipay-verifone-checkout": "^1.0"
+        "digitickets/omnipay-optomany-checkout": "^1.0"
     }
 }
 ```

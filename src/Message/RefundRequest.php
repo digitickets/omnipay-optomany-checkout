@@ -2,58 +2,38 @@
 
 namespace DigiTickets\OmnipayOptomanyCheckout\Message;
 
-use Guzzle\Http\Exception\BadResponseException;
+use DNAPayments\DNAPayments;
 
 class RefundRequest extends AbstractRequest
 {
-    const REFUND_ACTION_REFUND = 'refund';
-    const REFUND_ACTION_VOID = 'void_capture';
-
     public function getData()
     {
         return [
-            'amount' => $this->getAmountInteger(),
+            'id' => $this->getTransactionReference(),
+            'amount' => $this->getAmount(),
         ];
-    }
-
-    public function getRefundAction()
-    {
-        return $this->getParameter('refundAction');
-    }
-
-    public function setRefundAction(string $value)
-    {
-        return $this->setParameter('refundAction', $value);
     }
 
     public function sendData($data)
     {
-        $transactionRef = $this->getTransactionReference();
+        $response = $this->getDnaPaymentsInstance()->refund($data);
 
-        // Refund or void the transaction using the verifone API
-        try{
-            $httpResponse = $this->httpClient->post(
-                $this->getEndpoint().'/transaction/'.$transactionRef.'/'.$this->getRefundAction(),
-                [
-                    'X-APIKEY' => $this->getApiKey(),
-                    'Content-Type' => 'application/json',
-                ],
-                json_encode($data)
-            )->send();
+        return $this->response = new RefundResponse($this, $response);
+    }
 
-        } catch (BadResponseException $e) {
-            // On HTTP errors being returned, we still want to pass the response through, as Verifone passes through extra data in the body of errors,
-            //  but only if it's returning json with a message field.
-            $response = $e->getResponse();
-            $data = json_decode($response->getBody(true), true);
-            if(!empty($data["message"])){
-                $httpResponse = $response;
-            }else{
-                // Unknown error
-                throw $e;
-            }
-        }
+    /**
+     * @param DNAPayments $instance
+     */
+    public function setDnaPaymentsInstance(DNAPayments $instance)
+    {
+        $this->setParameter('dnaPaymentsInstance', $instance);
+    }
 
-        return $this->response = new RefundResponse($this, $httpResponse->json());
+    /**
+     * @return DNAPayments | null
+     */
+    public function getDnaPaymentsInstance()
+    {
+        return $this->getParameter('dnaPaymentsInstance');
     }
 }

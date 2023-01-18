@@ -2,7 +2,6 @@
 
 namespace DigiTickets\OmnipayOptomanyCheckout\Message;
 
-use DNAPayments\DNAPayments;
 use Omnipay\Common\Message\AbstractResponse;
 
 class AuthResponse extends AbstractResponse

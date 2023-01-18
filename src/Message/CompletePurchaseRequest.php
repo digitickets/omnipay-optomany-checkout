@@ -19,8 +19,16 @@ class CompletePurchaseRequest extends AbstractRequest
 
         $postData = empty($data) ? json_decode($postJson, true) : $data;
 
-        if(!$this->validateSignature($postData, $this->getClientSecret())) {
+        if (empty($postData)) {
+            throw new \Exception("No data in callback");
+        }
+
+        if (!$this->validateSignature($postData, $this->getClientSecret())) {
             throw new \Exception("Invalid signature");
+        }
+
+        if ($this->getTransactionId() != $postData['invoiceId']) {
+            throw new \Exception("The order does not match the invoiceId.");
         }
 
         return $this->response = new CompletePurchaseResponse($this, $postData);
@@ -34,20 +42,19 @@ class CompletePurchaseRequest extends AbstractRequest
      */
     public function validateSignature(array $data, string $clientSecret)
     {
-        if(empty($clientSecret))
+        if (empty($clientSecret)) {
             throw new \Exception("Missing client secret");
+        }
 
         $message =
-            $data['id'] .
-            $data['amount'] .
-            $data['currency'] .
-            $data['invoiceId'] .
-            $data['errorCode'] .
+            $data['id'].
+            $data['amount'].
+            $data['currency'].
+            $data['invoiceId'].
+            $data['errorCode'].
             $data['success'];
         $calculatedSignature = hash_hmac('sha256', $message, $clientSecret);
-        print_r('       ');
-        print_r($calculatedSignature);
-        if(!$calculatedSignature === $data['signature']){
+        if (!$calculatedSignature === $data['signature']) {
             return false;
         }
 

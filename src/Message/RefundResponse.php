@@ -6,9 +6,11 @@ use Omnipay\Common\Message\AbstractResponse;
 
 class RefundResponse extends AbstractResponse
 {
-    const SUCCESS_STATUSES = [
-        'PENDING',
-        'SETTLEMENT_CANCELLED',
+    const TRANSACTION_STATES = [
+        'AUTH',
+        'FAILED',
+        'REJECT',
+        'CHARGE',
     ];
 
     /**
@@ -16,7 +18,7 @@ class RefundResponse extends AbstractResponse
      */
     public function isSuccessful()
     {
-        return isset($this->data['status']) && in_array($this->data['status'], self::SUCCESS_STATUSES);
+        return isset($this->data['status']) && ($this->data['status'] == true);
     }
 
     /**
@@ -24,7 +26,7 @@ class RefundResponse extends AbstractResponse
      */
     public function getTransactionReference()
     {
-        return $this->data['transaction'] ?? $this->data['_id'] ?? '';
+        return $this->data['id'] ?? '';
     }
 
     /**
@@ -32,17 +34,7 @@ class RefundResponse extends AbstractResponse
      */
     public function getMessage()
     {
-        $output = [
-            $this->data['status'] ?? '',
-            $this->data['status_reason'] ?? '',
-            // This is only filled when there is an http error
-            $this->data['message'] ?? '',
-        ];
-
-        return implode(
-            ' - ',
-            array_filter($output)
-        );
+        return $this->data['message'] ?? '';
     }
 
     /**
@@ -50,6 +42,6 @@ class RefundResponse extends AbstractResponse
      */
     public function getCode()
     {
-        return $this->data['status'] ?? $this->data['code'] ?? '';
+        return $this->data['code'] ?? '';
     }
 }

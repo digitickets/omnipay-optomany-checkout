@@ -3,7 +3,7 @@
 namespace DigiTickets\OmnipayOptomanyCheckout\Message;
 
 /**
- * returns a redirect url sending customer to verifone Checkout page
+ * returns a redirect url sending customer to optomany Checkout page
  */
 class PurchaseRequest extends AbstractRequest
 {

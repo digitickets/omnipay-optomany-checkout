@@ -10,8 +10,6 @@ use DigiTickets\OmnipayOptomanyCheckout\Message\CompletePurchaseRequest;
 use DigiTickets\OmnipayOptomanyCheckout\Message\PurchaseRequest;
 use DigiTickets\OmnipayOptomanyCheckout\Message\RefundRequest;
 use DNAPayments\DNAPayments;
-use DNAPayments\Util\RequestException;
-use Exception;
 use Guzzle\Http\ClientInterface;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\RequestInterface;
@@ -39,9 +37,9 @@ class Gateway extends AbstractGateway
         $this->dnaPayments = new DNAPayments([
             'isTestMode' => true,
             'scopes' => [
-                'allowHosted' => true
+                'allowHosted' => true,
             ],
-            'autoRedirectDelayInMs' => "10"
+            'autoRedirectDelayInMs' => "1000",
         ]);
         parent::__construct($httpClient, $httpRequest);
     }
@@ -102,6 +100,8 @@ class Gateway extends AbstractGateway
      */
     public function refund(array $options = [])
     {
+        $options['dnaPaymentsInstance'] = $this->dnaPayments;
 
+        return $this->createRequest(RefundRequest::class, $options);
     }
 }
