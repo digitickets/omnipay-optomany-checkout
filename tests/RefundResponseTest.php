@@ -34,21 +34,15 @@ class RefundResponseTest extends TestCase
     {
         return [
             'success' => [
-                ['_id' => '123', 'status' => 'PENDING', 'status_reason' => ''],
+                ['id' => '123', 'success' => true, 'message' => 'success'],
                 true,
-                'PENDING',
+                'success',
                 '123',
             ],
             'failed' => [
-                ['_id' => '123', 'status' => 'FAILED', 'status_reason' => 'failed reason'],
+                ['id' => '123', 'success' => false, 'message' => 'failed'],
                 false,
-                'FAILED - failed reason',
-                '123',
-            ],
-            'http error' => [
-                ['_id' => '123', 'message' => 'Bad request', 'code' => '400'],
-                false,
-                'Bad request',
+                'failed',
                 '123',
             ],
         ];
