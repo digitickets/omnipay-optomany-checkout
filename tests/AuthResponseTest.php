@@ -7,19 +7,31 @@ use DigiTickets\OmnipayOptomanyCheckout\Message\AuthResponse;
 use Mockery;
 use Omnipay\Tests\TestCase;
 
-class CheckoutCreateCustomerResponseTest extends TestCase
+class AuthResponseTest extends TestCase
 {
-    public function testCreatingCustomer()
+    public function testGetAccessToken()
     {
         $request = Mockery::mock(AuthRequest::class);
         $data = [
-            '_id' => '123',
+            'access_token' => 'testtoken',
         ];
 
         $purchaseResponse = new AuthResponse($request, $data);
 
         $this->assertTrue($purchaseResponse->isSuccessful());
         $this->assertFalse($purchaseResponse->isRedirect());
-        $this->assertEquals('123', $purchaseResponse->getCustomerId());
+        $this->assertEquals('testtoken', $purchaseResponse->getAccessToken());
+    }
+
+    public function testNoAccessToken()
+    {
+        $request = Mockery::mock(AuthRequest::class);
+        $data = [
+            'access_token' => '',
+        ];
+
+        $purchaseResponse = new AuthResponse($request, $data);
+
+        $this->assertFalse($purchaseResponse->isSuccessful());
     }
 }

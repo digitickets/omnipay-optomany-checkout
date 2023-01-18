@@ -24,6 +24,11 @@ class CheckoutUrlResponse extends AbstractResponse
      */
     public function isSuccessful()
     {
+        return false;
+    }
+
+    public function isRedirect()
+    {
         $json = $this->getData();
 
         return $json &&

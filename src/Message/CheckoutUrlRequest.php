@@ -14,7 +14,7 @@ class CheckoutUrlRequest extends AbstractRequest
     public function getData()
     {
         $this->validate('amount');
-        $this->validate('postLink');
+        $this->validate('notifyUrl');
 
         $card = $this->getCard();
 

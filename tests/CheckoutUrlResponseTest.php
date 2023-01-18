@@ -13,14 +13,27 @@ class CheckoutUrlResponseTest extends TestCase
     {
         $request = Mockery::mock(CheckoutUrlRequest::class);
         $data = [
-            '_id' => '123',
             'url' => 'http://google.com',
         ];
 
         $purchaseResponse = new CheckoutUrlResponse($request, $data);
 
-        $this->assertTrue($purchaseResponse->isSuccessful());
-        $this->assertFalse($purchaseResponse->isRedirect());
+        $this->assertFalse($purchaseResponse->isSuccessful());
+        $this->assertTrue($purchaseResponse->isRedirect());
         $this->assertEquals('http://google.com', $purchaseResponse->getCheckoutUrl());
+    }
+
+    public function testNotCreatingCheckoutUrl()
+    {
+        $request = Mockery::mock(CheckoutUrlRequest::class);
+        $data = [
+            'url' => '',
+        ];
+
+        $purchaseResponse = new CheckoutUrlResponse($request, $data);
+
+        $this->assertFalse($purchaseResponse->isSuccessful());
+        $this->assertFalse($purchaseResponse->isRedirect());
+        $this->assertNotEquals('http://google.com', $purchaseResponse->getCheckoutUrl());
     }
 }
