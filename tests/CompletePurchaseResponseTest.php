@@ -16,7 +16,6 @@ class CompletePurchaseResponseTest extends TestCase
         array $data,
         bool $expectedSuccess,
         bool $expectedCancelled,
-        string $expectedMessage,
         string $expectedReference = null
     ) {
         $request = Mockery::mock(CompletePurchaseRequest::class);
@@ -25,7 +24,6 @@ class CompletePurchaseResponseTest extends TestCase
 
         $this->assertEquals($expectedSuccess, $response->isSuccessful());
         $this->assertEquals($expectedCancelled, $response->isCancelled());
-        $this->assertEquals($expectedMessage, $response->getMessage());
         $this->assertEquals($expectedReference, $response->getTransactionReference());
     }
 
@@ -36,25 +34,16 @@ class CompletePurchaseResponseTest extends TestCase
     {
         return [
             'success' => [
-                ['_id' => '123', 'status' => 'SETTLEMENT_REQUESTED'],
+                ['id' => '123', 'success' => true],
                 true,
                 false,
-                'SETTLEMENT_REQUESTED',
                 '123',
             ],
             'declined' => [
-                ['status' => 'DECLINED'],
+                ['id' => '', 'success' => false],
                 false,
                 true,
-                'DECLINED',
-                '',
-            ],
-            'error' => [
-                ['error' => 'test error'],
-                false,
-                true,
-                'test error',
-                '',
+                null,
             ],
         ];
     }
