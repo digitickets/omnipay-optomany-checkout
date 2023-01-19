@@ -11,7 +11,7 @@
     "web",
     "service"
   ],
-  "homepage": "https://github.com/digitickets/omnipay-verifone-checkout",
+  "homepage": "https://github.com/digitickets/omnipay-optomany-checkout",
   "license": "MIT",
   "autoload": {
     "psr-4": {
