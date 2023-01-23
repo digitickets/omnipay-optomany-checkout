@@ -30,7 +30,6 @@ class AuthRequest extends AbstractRequest
      */
     public function sendData($data)
     {
-
         $response = DNAPayments::auth($data);
 
         return $this->response = new AuthResponse($this, $response);

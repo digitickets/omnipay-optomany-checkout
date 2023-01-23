@@ -6,19 +6,12 @@ use Omnipay\Common\Message\AbstractResponse;
 
 class RefundResponse extends AbstractResponse
 {
-    const TRANSACTION_STATES = [
-        'AUTH',
-        'FAILED',
-        'REJECT',
-        'CHARGE',
-    ];
-
     /**
      * @return bool
      */
     public function isSuccessful()
     {
-        return isset($this->data['success']) && ($this->data['success'] == true);
+        return !empty($this->data['success']);
     }
 
     /**

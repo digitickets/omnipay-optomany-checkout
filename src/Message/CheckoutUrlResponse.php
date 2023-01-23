@@ -6,16 +6,14 @@ use Omnipay\Common\Message\AbstractResponse;
 
 class CheckoutUrlResponse extends AbstractResponse
 {
-
     /**
      * @return string|null
      */
     public function getCheckoutUrl()
     {
+        $data = $this->getData();
 
-        $json = $this->getData();
-
-        return $json['url'];
+        return $data['url'];
     }
 
 
@@ -29,10 +27,10 @@ class CheckoutUrlResponse extends AbstractResponse
 
     public function isRedirect()
     {
-        $json = $this->getData();
+        $data = $this->getData();
 
-        return $json &&
-            is_array($json) &&
-            !empty($json['url']);
+        return $data &&
+            is_array($data) &&
+            !empty($data['url']);
     }
 }

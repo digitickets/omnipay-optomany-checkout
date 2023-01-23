@@ -15,19 +15,8 @@ use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\RequestInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
-/**
- * @method RequestInterface authorize(array $options = array())
- * @method RequestInterface completeAuthorize(array $options = array())
- * @method RequestInterface capture(array $options = array())
- * @method RequestInterface void(array $options = array())
- * @method RequestInterface createCard(array $options = array())
- * @method RequestInterface updateCard(array $options = array())
- * @method RequestInterface deleteCard(array $options = array())
- * @method RequestInterface completePurchase(array $options = array())
- */
 class Gateway extends AbstractGateway
 {
-
     /** @var DNAPayments */
     protected $dnaPayments;
 
@@ -35,11 +24,9 @@ class Gateway extends AbstractGateway
     {
         //set up DNAPayments config.
         $this->dnaPayments = new DNAPayments([
-            'isTestMode' => true,
             'scopes' => [
                 'allowHosted' => true,
-            ],
-            'autoRedirectDelayInMs' => "1000",
+            ]
         ]);
         parent::__construct($httpClient, $httpRequest);
     }
@@ -67,6 +54,9 @@ class Gateway extends AbstractGateway
      */
     public function purchase(array $parameters = [])
     {
+        //set dnaPayments testMode from parameters
+        $this->dnaPayments::configure(['isTestMode' => $parameters['testMode'] ?? '']);
+
         //get authentication
         $request = $this->createRequest(AuthRequest::class, $parameters);
         /** @var AuthResponse $response */
@@ -100,6 +90,9 @@ class Gateway extends AbstractGateway
      */
     public function refund(array $options = [])
     {
+        //set dnaPayments testMode from parameters
+        $this->dnaPayments::configure(['isTestMode' => $parameters['testMode'] ?? '']);
+
         $options['dnaPaymentsInstance'] = $this->dnaPayments;
 
         return $this->createRequest(RefundRequest::class, $options);

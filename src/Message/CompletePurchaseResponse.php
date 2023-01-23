@@ -11,7 +11,7 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function isSuccessful()
     {
-        return isset($this->data['success']) && ($this->data['success'] == true);
+        return !empty($this->data['success']);
     }
 
     /**
@@ -27,7 +27,6 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function isPending()
     {
-
         return $this->isSuccessful() && isset($this->data['settled']) && ($this->data['settled'] == false);
     }
 

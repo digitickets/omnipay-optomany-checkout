@@ -25,5 +25,4 @@ class AuthResponse extends AbstractResponse
 
         return $json && is_array($json) && !empty($json['access_token']);
     }
-
 }

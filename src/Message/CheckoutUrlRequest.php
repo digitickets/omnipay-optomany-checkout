@@ -28,10 +28,10 @@ class CheckoutUrlRequest extends AbstractRequest
         $data['invoiceId'] = $this->getTransactionId();
         $data['currency'] = $this->getCurrency();
         $data['amount'] = $this->getAmount();
-        $data['accountId'] = 'accountId';
         $data['accountCountry'] = $card->getCountry();
         $data['accountCity'] = $card->getCity();
         $data['accountStreet1'] = $card->getAddress1();
+        $data['accountStreet2'] = $card->getAddress2();
         $data['accountEmail'] = $card->getEmail();
         $data['accountFirstName'] = $card->getFirstName();
         $data['accountLastName'] = $card->getLastName();
