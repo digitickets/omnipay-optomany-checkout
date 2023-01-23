@@ -6,6 +6,8 @@ Omnipay implementation of Optomany's Checkout hosted gateway.
 
 See [Optomany's Checkout documentation](https://developer.dnapayments.com/docs/payment-page/) for more details.
 
+Also [Checkout PHP SDK Integration Guide](https://developer.dnapayments.com/docs/ecommerce/checkout/integration-guide/php) for php integration
+
 ## Installation
 
 This driver is installed via [Composer](http://getcomposer.org/). To install, simply add it to your `composer.json` file:
@@ -56,4 +58,4 @@ If you are having general issues with Omnipay, we suggest posting on
 [Stack Overflow](http://stackoverflow.com/). Be sure to add the
 [omnipay tag](http://stackoverflow.com/questions/tagged/omnipay) so it can be easily found.
 
-If you believe you have found a bug in this driver, please report it using the [GitHub issue tracker](https://github.com/digitickets/omnipay-verifone-checkout/issues), or better yet, fork the library and submit a pull request.
+If you believe you have found a bug in this driver, please report it using the [GitHub issue tracker](https://github.com/digitickets/omnipay-optomany-checkout/issues), or better yet, fork the library and submit a pull request.
