@@ -84,7 +84,7 @@ class Gateway extends AbstractGateway
     public function refund(array $options = [])
     {
         // set dnaPayments testMode from parameters
-        $this->dnaPayments::configure(['isTestMode' => $parameters['testMode'] ?? '']);
+        $this->dnaPayments::configure(['isTestMode' => $options['testMode'] ?? '']);
 
         $options['dnaPaymentsInstance'] = $this->dnaPayments;
 

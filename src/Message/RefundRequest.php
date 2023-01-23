@@ -9,8 +9,13 @@ class RefundRequest extends AbstractRequest
     public function getData()
     {
         return [
-            'id' => $this->getTransactionReference(),
+            'client_id' => $this->getClientId(),
+            'client_secret' => $this->getClientSecret(),
+            'terminal' => $this->getTerminal(),
+            'invoiceId' => $this->getTransactionId(),
+            'transaction_id' => $this->getTransactionReference(),
             'amount' => $this->getAmount(),
+            'currency' => $this->getCurrency(),
         ];
     }
 
