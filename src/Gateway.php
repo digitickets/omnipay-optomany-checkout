@@ -12,7 +12,6 @@ use DigiTickets\OmnipayOptomanyCheckout\Message\RefundRequest;
 use DNAPayments\DNAPayments;
 use Guzzle\Http\ClientInterface;
 use Omnipay\Common\AbstractGateway;
-use Omnipay\Common\Message\RequestInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 class Gateway extends AbstractGateway
@@ -22,11 +21,11 @@ class Gateway extends AbstractGateway
 
     public function __construct(ClientInterface $httpClient = null, HttpRequest $httpRequest = null)
     {
-        //set up DNAPayments config.
+        // set up DNAPayments config.
         $this->dnaPayments = new DNAPayments([
             'scopes' => [
                 'allowHosted' => true,
-            ]
+            ],
         ]);
         parent::__construct($httpClient, $httpRequest);
     }
@@ -48,21 +47,19 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * @param array $parameters
-     *
      * @return \Omnipay\Common\Message\AbstractRequest|PurchaseRequest
      */
     public function purchase(array $parameters = [])
     {
-        //set dnaPayments testMode from parameters
+        // set dnaPayments testMode from parameters
         $this->dnaPayments::configure(['isTestMode' => $parameters['testMode'] ?? '']);
 
-        //get authentication
+        // get authentication
         $request = $this->createRequest(AuthRequest::class, $parameters);
         /** @var AuthResponse $response */
         $response = $request->send();
 
-        //redirection for payment
+        // redirection for payment
         $parameters['auth'] = $response->getData();
         $request = $this->createRequest(CheckoutUrlRequest::class, $parameters);
         /** @var CheckoutUrlResponse $response */
@@ -74,8 +71,6 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * @param array $parameters
-     *
      * @return \Omnipay\Common\Message\AbstractRequest|CompletePurchaseRequest
      */
     public function acceptNotification(array $parameters = [])
@@ -84,13 +79,11 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * @param array $options
-     *
      * @return \Omnipay\Common\Message\AbstractRequest|RefundRequest
      */
     public function refund(array $options = [])
     {
-        //set dnaPayments testMode from parameters
+        // set dnaPayments testMode from parameters
         $this->dnaPayments::configure(['isTestMode' => $parameters['testMode'] ?? '']);
 
         $options['dnaPaymentsInstance'] = $this->dnaPayments;

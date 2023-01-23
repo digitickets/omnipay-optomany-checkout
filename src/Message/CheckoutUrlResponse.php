@@ -16,7 +16,6 @@ class CheckoutUrlResponse extends AbstractResponse
         return $data['url'];
     }
 
-
     /**
      * @return bool
      */

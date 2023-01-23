@@ -21,16 +21,13 @@ class RefundRequest extends AbstractRequest
         return $this->response = new RefundResponse($this, $response);
     }
 
-    /**
-     * @param DNAPayments $instance
-     */
     public function setDnaPaymentsInstance(DNAPayments $instance)
     {
         $this->setParameter('dnaPaymentsInstance', $instance);
     }
 
     /**
-     * @return DNAPayments | null
+     * @return DNAPayments|null
      */
     public function getDnaPaymentsInstance()
     {

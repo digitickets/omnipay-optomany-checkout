@@ -19,7 +19,7 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function isCancelled()
     {
-        return !empty($this->data['errorCode']) || !isset($this->data['success']) || ($this->data['success'] == false);
+        return !empty($this->data['errorCode']) || !isset($this->data['success']) || (!$this->data['success']);
     }
 
     /**
@@ -27,7 +27,7 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function isPending()
     {
-        return $this->isSuccessful() && isset($this->data['settled']) && ($this->data['settled'] == false);
+        return $this->isSuccessful() && isset($this->data['settled']) && (!$this->data['settled']);
     }
 
     /**
