@@ -3,6 +3,7 @@
 namespace DigiTickets\OmnipayOptomanyCheckout\Message;
 
 use DNAPayments\DNAPayments;
+use Omnipay\Common\Exception\InvalidRequestException;
 
 class CompletePurchaseRequest extends AbstractRequest
 {
@@ -20,15 +21,15 @@ class CompletePurchaseRequest extends AbstractRequest
         $postData = empty($data) ? json_decode($postJson, true) : $data;
 
         if (empty($postData)) {
-            throw new \Exception('No data in callback');
+            throw new InvalidRequestException('No data in callback');
         }
 
         if (!DNAPayments::isValidSignature($postData, $this->getClientSecret())) {
-            throw new \Exception('Invalid signature');
+            throw new InvalidRequestException('Invalid signature');
         }
 
         if (empty($postData['invoiceId']) || ($this->getTransactionId() != $postData['invoiceId'])) {
-            throw new \Exception('The order does not match the invoiceId.');
+            throw new InvalidRequestException('The order does not match the invoiceId.');
         }
 
         return $this->response = new CompletePurchaseResponse($this, $postData);
