@@ -27,7 +27,7 @@ class CompletePurchaseRequest extends AbstractRequest
             throw new \Exception("Invalid signature");
         }
 
-        if (empty($this->getTransactionId()) || ($this->getTransactionId() != $postData['invoiceId'])) {
+        if (empty($postData['invoiceId']) || ($this->getTransactionId() != $postData['invoiceId'])) {
             throw new \Exception("The order does not match the invoiceId.");
         }
 
