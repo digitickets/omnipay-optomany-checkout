@@ -29,7 +29,7 @@ And run composer to update your dependencies:
 
 This driver allows you to redirect the user to an Optomany Checkout page, after passing in customer details from your own forms and a redirect URL. Once the user has paid they will be redirected back to your redirect page. You can then await the webhook that confirms the payment.
 
-It also supports refunds of partial and full amounts, but only one refund can be made against the transaction ID, so if additional refunds are required these will have to be completed using the token via the axept® Gateway.
+It also supports refunds of partial and full amounts. The documentation says only one refund can be made against the transaction ID, but in testing multiple partial refunds seem to go through fine.
 
 It requires use of 3DSecure v2.
 
